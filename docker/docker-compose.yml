@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  lugarphp:
+    image:  lugar_php:0.1
+    ports:
+      - 80:80
+    volumes:
+      - /var/www/html:/var/www/html
+    networks:
+       default:
+           aliases:
+             - api.lugar.local
+  mimysql:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+     MYSQL_ROOT_PASSWORD: root
+    volumes:
+     - /dbdata:/var/lib/mysql
