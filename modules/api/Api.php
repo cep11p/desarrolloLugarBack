@@ -1,7 +1,8 @@
 <?php
 
 namespace app\modules\api;
-//
+use yii\web\Response;
+use Yii;
 
 class Api extends \yii\base\Module
 {
