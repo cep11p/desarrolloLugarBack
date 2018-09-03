@@ -14,11 +14,9 @@ use Yii;
  * @property integer $regionid
  * @property integer $departamentoid
  * @property integer $municipioid
- * @property integer $provinciaid
  *
  * @property \app\models\Departamento $departamento
  * @property \app\models\Municipio $municipio
- * @property \app\models\Provincia $provincia
  * @property \app\models\Region $region
  * @property \app\models\Lugar[] $lugars
  * @property string $aliasModel
@@ -42,12 +40,10 @@ abstract class Localidad extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['regionid', 'departamentoid', 'municipioid', 'provinciaid'], 'integer'],
-            [['municipioid', 'provinciaid'], 'required'],
+            [['regionid', 'departamentoid', 'municipioid'], 'integer'],
             [['nombre'], 'string', 'max' => 200],
             [['departamentoid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Departamento::className(), 'targetAttribute' => ['departamentoid' => 'id']],
             [['municipioid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Municipio::className(), 'targetAttribute' => ['municipioid' => 'id']],
-            [['provinciaid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Provincia::className(), 'targetAttribute' => ['provinciaid' => 'id']],
             [['regionid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Region::className(), 'targetAttribute' => ['regionid' => 'id']]
         ];
     }
@@ -63,7 +59,6 @@ abstract class Localidad extends \yii\db\ActiveRecord
             'regionid' => 'Regionid',
             'departamentoid' => 'Departamentoid',
             'municipioid' => 'Municipioid',
-            'provinciaid' => 'Provinciaid',
         ];
     }
 
@@ -81,14 +76,6 @@ abstract class Localidad extends \yii\db\ActiveRecord
     public function getMunicipio()
     {
         return $this->hasOne(\app\models\Municipio::className(), ['id' => 'municipioid']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProvincia()
-    {
-        return $this->hasOne(\app\models\Provincia::className(), ['id' => 'provinciaid']);
     }
 
     /**

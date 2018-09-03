@@ -18,7 +18,7 @@ class LocalidadSearch extends Localidad
     public function rules()
     {
         return [
-            [['id', 'regionid', 'departamentoid', 'municipioid', 'provinciaid'], 'integer'],
+            [['id', 'regionid', 'departamentoid', 'municipioid'], 'integer'],
             [['nombre'], 'safe'],
         ];
     }
@@ -60,7 +60,6 @@ class LocalidadSearch extends Localidad
             'regionid' => $this->regionid,
             'departamentoid' => $this->departamentoid,
             'municipioid' => $this->municipioid,
-            'provinciaid' => $this->provinciaid,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre]);
@@ -89,7 +88,6 @@ class LocalidadSearch extends Localidad
             'regionid' => $this->regionid,
             'departamentoid' => $this->departamentoid,
             'municipioid' => $this->municipioid,
-            'provinciaid' => $this->provinciaid,
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre]);
