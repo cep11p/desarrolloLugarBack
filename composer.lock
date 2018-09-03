@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba0eff95e35a291c6b5f20086b698bb9",
+    "content-hash": "ddb2df7fbf29c1e89bd2937781e8f850",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -27,6 +27,22 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "bower-asset/font-awesome",
+            "version": "5.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "03bcd4dc0831f0651a3b5a7cd41153e8129fccf3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/03bcd4dc0831f0651a3b5a7cd41153e8129fccf3",
+                "reference": "03bcd4dc0831f0651a3b5a7cd41153e8129fccf3",
+                "shasum": null
+            },
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/inputmask",
@@ -1247,6 +1263,63 @@
                 "psr-3"
             ],
             "time": "2016-10-10T12:19:37+00:00"
+        },
+        {
+            "name": "rmrevin/yii2-fontawesome",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmrevin/yii2-fontawesome.git",
+                "reference": "6f581ce445f650b931fb41d053d18c00b41a7df7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/6f581ce445f650b931fb41d053d18c00b41a7df7",
+                "reference": "6f581ce445f650b931fb41d053d18c00b41a7df7",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/font-awesome": "~5.0",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "^2.0.0"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "1.0.*",
+                "phpdocumentor/reflection-docblock": "~3.1.0",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "rmrevin\\yii\\fontawesome\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Revin Roman",
+                    "email": "roman@rmrevin.com",
+                    "homepage": "https://rmrevin.com/"
+                }
+            ],
+            "description": "Asset Bundle for Yii2 with Font Awesome",
+            "keywords": [
+                "asset",
+                "awesome",
+                "bundle",
+                "font",
+                "yii"
+            ],
+            "time": "2018-07-11T08:25:07+00:00"
         },
         {
             "name": "schmunk42/retry",
