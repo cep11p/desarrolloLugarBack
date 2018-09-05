@@ -38,6 +38,7 @@ $config = [
 //        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+            'class' => '\bedezign\yii2\audit\components\web\ErrorHandler',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -92,13 +93,14 @@ $config = [
             'admins'=>['admin']
         ],
         'rbac' => 'dektrium\rbac\RbacWebModule',
-//        
-//        "audit"=>[
-//            "class"=>"bedezign\yii2\audit\Audit",
-//            'accessIps'=>null,
-//            'accessUsers'=>null,
-//            'accessRoles'=>null
-//        ],
+        
+        "audit"=>[
+            "class"=>"bedezign\yii2\audit\Audit",
+            "ignoreActions" =>['audit/*', 'debug/*'],
+            'accessIps'=>null,
+            'accessUsers'=>null,
+            'accessRoles'=>null
+        ],
         
         'api' => [
             'class' => 'app\modules\api\Api',

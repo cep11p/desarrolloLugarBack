@@ -21,7 +21,8 @@
         "schmunk42/yii2-giiant": "@stable",
         "dektrium/yii2-user": "0.9.12",
         "dektrium/yii2-rbac": "1.0.0-alpha@dev",
-        "rmrevin/yii2-fontawesome": "~3.1"
+        "rmrevin/yii2-fontawesome": "~3.1",
+        "bedezign/yii2-audit": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
