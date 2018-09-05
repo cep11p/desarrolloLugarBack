@@ -5,6 +5,7 @@
 namespace app\modules\backend\controllers\base;
 
 use app\models\Lugar;
+    use app\models\LugarSearch;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -31,9 +32,8 @@ public $enableCsrfValidation = false;
 */
 public function actionIndex()
 {
-    $dataProvider = new \yii\data\ActiveDataProvider([
-    'query' => Lugar::find(),
-    ]);
+    $searchModel  = new LugarSearch;
+    $dataProvider = $searchModel->search($_GET);
 
 Tabs::clearLocalStorage();
 
@@ -42,6 +42,7 @@ Url::remember();
 
 return $this->render('index', [
 'dataProvider' => $dataProvider,
+    'searchModel' => $searchModel,
 ]);
 }
 
