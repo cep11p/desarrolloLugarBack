@@ -19,7 +19,7 @@ class LugarSearch extends Lugar
     {
     return [
         [['id', 'localidadid'], 'integer'],
-        [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto'], 'safe'],
+        [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto','escalera'], 'safe'],
     ];
     }
 
@@ -67,7 +67,8 @@ class LugarSearch extends Lugar
             ->andFilterWhere(['like', 'longitud', $this->longitud])
             ->andFilterWhere(['like', 'barrio', $this->barrio])
             ->andFilterWhere(['like', 'piso', $this->piso])
-            ->andFilterWhere(['like', 'depto', $this->depto]);
+            ->andFilterWhere(['like', 'depto', $this->depto])
+            ->andFilterWhere(['like', 'escalera', $this->escalera]);
 
         return $dataProvider;
     }
@@ -100,7 +101,8 @@ class LugarSearch extends Lugar
             ->andFilterWhere(['like', 'longitud', $this->longitud])
             ->andFilterWhere(['like', 'barrio', $this->barrio])
             ->andFilterWhere(['like', 'piso', $this->piso])
-            ->andFilterWhere(['like', 'depto', $this->depto]);
+            ->andFilterWhere(['like', 'depto', $this->depto])
+            ->andFilterWhere(['like', 'escalera', $this->escalera]);
 
         return $dataProvider;
     }

@@ -129,6 +129,7 @@ $actionColumnTemplateString = '<div class="action-buttons">'.$actionColumnTempla
 			'barrio',
 			/*'piso',*/
 			/*'depto',*/
+			/*'escalera',*/
         ],
         ]); ?>
     </div>

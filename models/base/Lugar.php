@@ -19,6 +19,7 @@ use Yii;
  * @property string $barrio
  * @property string $piso
  * @property string $depto
+ * @property string $escalera
  *
  * @property \app\models\Localidad $localidad
  * @property string $aliasModel
@@ -44,7 +45,7 @@ abstract class Lugar extends \yii\db\ActiveRecord
         return [
             [['localidadid'], 'required'],
             [['localidadid'], 'integer'],
-            [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto'], 'string', 'max' => 200],
+            [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto', 'escalera'], 'string', 'max' => 200],
             [['localidadid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Localidad::className(), 'targetAttribute' => ['localidadid' => 'id']]
         ];
     }
@@ -65,7 +66,18 @@ abstract class Lugar extends \yii\db\ActiveRecord
             'barrio' => 'Barrio',
             'piso' => 'Piso',
             'depto' => 'Depto',
+            'escalera' => 'Escalera',
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeHints()
+    {
+        return array_merge(parent::attributeHints(), [
+            'escalera' => 'En este atributo puede ir la escalera o el modulo',
+        ]);
     }
 
     /**

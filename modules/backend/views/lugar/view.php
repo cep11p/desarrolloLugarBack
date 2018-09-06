@@ -91,6 +91,7 @@ $this->params['breadcrumbs'][] = 'View';
         'barrio',
         'piso',
         'depto',
+        'escalera',
     ],
     ]); ?>
 

@@ -73,6 +73,9 @@ $form->field($model, 'localidadid')->dropDownList(
 
 <!-- attribute depto -->
 			<?= $form->field($model, 'depto')->textInput(['maxlength' => true]) ?>
+
+<!-- attribute escalera -->
+			<?= $form->field($model, 'escalera')->textInput(['maxlength' => true]) ?>
         </p>
         <?php $this->endBlock(); ?>
         
