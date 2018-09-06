@@ -4,6 +4,11 @@ namespace app\modules\api\controllers;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
+use Yii;
+use yii\base\Exception;
+
+use app\models\Lugar;
+
 class LugarController extends ActiveController{
     
     public $modelClass = 'app\models\Lugar';
@@ -50,7 +55,7 @@ class LugarController extends ActiveController{
     public function actions()
     {
         $actions = parent::actions();
-//        unset($actions['create']);
+        unset($actions['create']);
         $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
         return $actions;
     
@@ -70,4 +75,37 @@ class LugarController extends ActiveController{
 
         return $data;
     }   
+    
+    public function actionCreate()
+    {
+        $resultado['message']='Se guarda un Lugar';
+        $param = Yii::$app->request->post();
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrayErrors = array();
+        try {
+       
+            $model = new Lugar;
+            $model->setAttributes($param);
+            
+            if(!$model->save()){
+                $arrayErrors['lugar']=$model->getErrors();
+                $arrayErrors['tab']='lugar';                
+                throw new Exception(json_encode($arrayErrors));
+            }            
+            
+            $transaction->commit();
+            
+            $resultado['success']=true;
+            $resultado['data']['id']=$model->id;
+            
+            return  $resultado;
+           
+        }catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            $transaction->rollBack();
+            $mensaje =$exc->getMessage();
+            throw new \yii\web\HttpException(500, $mensaje);
+        }
+
+    }
 }
