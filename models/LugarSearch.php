@@ -73,6 +73,12 @@ class LugarSearch extends Lugar
         return $dataProvider;
     }
     
+    /**
+     * Este filtrado filtra por todos los atributos
+     * @url api.lugar.local/api/lugar?id=1&nombre=algo
+     * @param array $params
+     * @return ActiveDataProvider
+     */
     public function busquedadGeneral($params)
     {
         $query = Lugar::find();

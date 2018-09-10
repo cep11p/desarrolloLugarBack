@@ -28,7 +28,37 @@ class Lugar extends BaseLugar
             parent::rules(),
             [
                 # custom validation rules
+                [['localidadid'],'existeLugar']
             ]
         );
+    }
+    
+    public function existeLugar(){
+        $modelSearch = new LugarSearch();
+        $resultado = $modelSearch->busquedadGeneral($this->attributes);
+        
+        if($resultado->getTotalCount()){
+            $lugar["id"]= $resultado->models[0]->id;
+            $this->addError("notificacion", "El lugar a registrar ya existe!");
+            $this->addError("lugarEncontrado", $lugar);
+        }
+    }
+    
+    public function buscarLugar(){
+        $modelSearch = new LugarSearch();
+        $resultado = $modelSearch->busquedadGeneral($this->attributes);
+        
+        if($resultado->getTotalCount()){
+            $lugarEntontrado= $resultado->models[0];
+            
+            $respuesta['lugarEncontrado'] = $lugarEntontrado;
+            $respuesta['notificacion'] = "El lugar a registrar ya existe";
+            
+            print_r($respuesta);
+            die();
+            return $respuesta;
+        }
+        
+        return false;
     }
 }
