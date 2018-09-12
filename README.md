@@ -43,66 +43,47 @@ The minimum requirement by this project template that your Web server supports P
 INSTALLATION
 ------------
 
-### Install via Composer
+### Install via Docker
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+Antes que nada debemos generar las imagenes de php con el Dockerfile, para ello, 
 
-You can then install this project template using the following command:
+	*abrimos la siguiente carpera "desarrolloLugarBack/docker/dockerfile/lugar y corremos el siguiente comando
 
-~~~
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
+		docker build -t lugar_php:0.1 .
 
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
-
-You can then access the application through the following URL:
-
-~~~
-http://localhost/basic/web/
-~~~
-
-
-### Install with Docker
-
-Update your vendor packages
-
-    docker-compose run --rm php composer update --prefer-dist
+Luego de crear la imagen de php, debemos crear y arrancar los contenedores que son necesario para el ambiente del sistema.
     
-Run the installation triggers (creating cookie validation code)
+   	*Levantamos/Creamos los contenedores
+		
+		-ambiente prod
+		docker-compose -p app -f docker-compose.yml -f docker-compose-prod.yml up -d 
+		
+		-ambiente dev
+		docker-compose -p app -f docker-compose.yml -f docker-compose-dev.yml up -d 
 
-    docker-compose run --rm php composer install    
-    
-Start the container
+	*Borramos los contenedores (borra los contenedores)
 
-    docker-compose up -d
-    
-You can then access the application through the following URL:
+		docker-compose -p app down
 
-    http://127.0.0.1:8000
+******************Ahora debemos importar el sql inicial del sistema******************
+Creamos el esquema de la bd desde docker
+        (PROD)
+	docker exec -i app_mimysql_1 mysql -u root -proot --execute 'create database lugar DEFAULT CHARACTER SET utf8'
+         
+        (DEV)
+	docker exec -i app_mimysql_1 mysql -u root -proot --execute 'create database lugar DEFAULT CHARACTER SET utf8'
 
-**NOTES:** 
-- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
-- The default configuration uses a host-volume in your home directory `.docker-composer` for composer caches
+Importamos el sql inicial que se encuentra en /desarrolloLugarBack/bd_inicial
+
+	docker exec -i app_mimysql_1 mysql -u root -p pril < bd_inicial.sql
+
+Realizar los pasos en el siguiente orden:
+
+1- Ahora debemos ejecutar el comando composer install. Como tenemos php en un contenedor debemos ejecutar el mismo comando dentro del contenedor. Para ello debemos 
+entrar al contenedor con el siguiente comando: 
+	docker exec -ti app_lugarphp_1 bash. 
+Luego ir a la carpeta de la aplicación desde la terminal y correr el comando : 
+	composer install
 
 
 CONFIGURATION
