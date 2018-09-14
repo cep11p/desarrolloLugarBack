@@ -47,6 +47,7 @@ class Lugar extends BaseLugar
                 #borramos el id, ya que el modelo a registrar aun no tiene id
                 $modeloEncontrado['id']="";
                 
+                //si $this viene con id cargado, nunca va a encontrar el parecido
                 if($this->attributes==$modeloEncontrado){
                     $this->addError("notificacion", "El lugar a registrar ya existe!");
                     $this->addError("lugarEncontrado", $lugar);

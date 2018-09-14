@@ -102,6 +102,12 @@ class LugarController extends ActiveController{
                     throw new Exception(json_encode($arrayErrors));
                 }
                 $model = $model->findOne(["id"=>$param['id']]);
+                
+                if($model==null){
+                    $arrayErrors['id']="El lugar con el id {$param['id']} no existe!";                
+                    $arrayErrors['tab']='lugar';                
+                    throw new Exception(json_encode($arrayErrors));
+                }
             }
             
             $model->setAttributes($param);
