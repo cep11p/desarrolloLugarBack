@@ -19,7 +19,7 @@ class LugarSearch extends Lugar
     {
     return [
         [['id', 'localidadid'], 'integer'],
-        [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto','escalera'], 'safe'],
+        [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto','escalera','globalSearch'], 'safe'],
     ];
     }
 
@@ -95,20 +95,39 @@ class LugarSearch extends Lugar
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'localidadid' => $this->localidadid,
-        ]);
+        if ($this->globalSearch){
+        $palabras = explode(" ", $this->globalSearch);
+            if(count($palabras)>1){   
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'calle', $this->calle])
-            ->andFilterWhere(['like', 'altura', $this->altura])
-            ->andFilterWhere(['like', 'latitud', $this->latitud])
-            ->andFilterWhere(['like', 'longitud', $this->longitud])
-            ->andFilterWhere(['like', 'barrio', $this->barrio])
-            ->andFilterWhere(['like', 'piso', $this->piso])
-            ->andFilterWhere(['like', 'depto', $this->depto])
-            ->andFilterWhere(['like', 'escalera', $this->escalera]);
+                foreach ($palabras as $pa1) {
+
+                    foreach ($palabras as $pa2) {
+                        $query->orFilterWhere(['and',
+                        ['like','calle',$pa1],
+                        ['like','altura',$pa2]]);
+                    }
+                }
+            }else{
+                $query->orFilterWhere(['like', 'calle', $this->globalSearch])
+                    ->orFilterWhere(['like', 'altura', $this->globalSearch]);
+            }
+        }else{
+            $query->andFilterWhere([
+                    'id' => $this->id,
+                    'localidadid' => $this->localidadid
+            ]);
+
+
+            $query->andFilterWhere(['=', 'barrio', $this->barrio])
+                ->andFilterWhere(['like', 'calle', $this->calle])
+                ->andFilterWhere(['like', 'altura', $this->altura])
+                ->andFilterWhere(['like', 'piso', $this->piso])
+                ->andFilterWhere(['like', 'depto', $this->depto]);
+        }
+    
+    $query->andFilterWhere([
+                'localidadid' => $this->localidadid
+            ]);
 
         return $dataProvider;
     }

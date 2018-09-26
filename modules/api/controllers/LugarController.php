@@ -94,23 +94,19 @@ class LugarController extends ActiveController{
         try {
        
             $model = new Lugar;
-            
+            $model->setAttributes($param);
+            $model->id = '';
             if(isset($param['usarLugarEncontrado']) && $param['usarLugarEncontrado']==true){
-                if(!isset($param['id'])){
-                    $arrayErrors['id']='El atributo id debe estar seteando si se quiere reutilizar el lugar!';                
-                    $arrayErrors['tab']='lugar';                
-                    throw new Exception(json_encode($arrayErrors));
-                }
-                $model = $model->findOne(["id"=>$param['id']]);
+                
+                $model = Lugar::findOne(array_filter($model->attributes));
                 
                 if($model==null){
-                    $arrayErrors['id']="El lugar con el id {$param['id']} no existe!";                
-                    $arrayErrors['tab']='lugar';                
-                    throw new Exception(json_encode($arrayErrors));
+                    $model = new Lugar;
+                    $model->setAttributes($param);
                 }
             }
             
-            $model->setAttributes($param);
+            
             if(!$model->save()){
                 $arrayErrors['lugar']=$model->getErrors();
                 $arrayErrors['tab']='lugar';                
