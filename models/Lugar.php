@@ -29,7 +29,7 @@ class Lugar extends BaseLugar
             parent::rules(),
             [
                 # custom validation rules
-                [['localidadid'],'existeLugar']
+//                [['localidadid'],'existeLugar']
             ]
         );
     }

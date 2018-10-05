@@ -96,15 +96,15 @@ class LugarController extends ActiveController{
             $model = new Lugar;
             $model->setAttributes($param);
             $model->id = '';
-            if(isset($param['usarLugarEncontrado']) && $param['usarLugarEncontrado']==true){
+//            if(isset($param['usarLugarEncontrado']) && $param['usarLugarEncontrado']==true){
                 
-                $model = Lugar::findOne(array_filter($model->attributes));
-                
-                if($model==null){
-                    $model = new Lugar;
-                    $model->setAttributes($param);
-                }
+            $model = Lugar::findOne(array_filter($model->attributes));
+
+            if($model==null){
+                $model = new Lugar;
+                $model->setAttributes($param);
             }
+//            }
             
             
             if(!$model->save()){
