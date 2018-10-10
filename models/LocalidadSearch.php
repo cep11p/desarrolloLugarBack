@@ -18,7 +18,7 @@ class LocalidadSearch extends Localidad
     public function rules()
     {
         return [
-            [['id', 'regionid', 'departamentoid', 'municipioid'], 'integer'],
+            [['id', 'regionid', 'departamentoid', 'municipioid','provinciaid'], 'integer'],
             [['nombre'], 'safe'],
         ];
     }
@@ -54,14 +54,14 @@ class LocalidadSearch extends Localidad
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        
         $query->andFilterWhere([
             'id' => $this->id,
             'regionid' => $this->regionid,
             'departamentoid' => $this->departamentoid,
             'municipioid' => $this->municipioid,
         ]);
-
+        
         $query->andFilterWhere(['like', 'nombre', $this->nombre]);
 
         return $dataProvider;
@@ -73,6 +73,7 @@ class LocalidadSearch extends Localidad
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false
         ]);
 
         $this->load($params,'');
@@ -82,15 +83,33 @@ class LocalidadSearch extends Localidad
             // $query->where('0=1');
             return $dataProvider;
         }
+        
+        
+        if(isset($this->provinciaid)){
+            $query->leftJoin("departamento as d", "departamentoid=d.id");
+            
+            $query->andFilterWhere([
+                'id' => $this->id,
+                'regionid' => $this->regionid,
+                'departamentoid' => $this->departamentoid,
+                'municipioid' => $this->municipioid,
+                'd.provinciaid' => $this->provinciaid,
+            ]);
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'regionid' => $this->regionid,
-            'departamentoid' => $this->departamentoid,
-            'municipioid' => $this->municipioid,
-        ]);
+            $query->andFilterWhere(['like', 'localidad.nombre', $this->nombre]);
+        }else{
+            $query->andFilterWhere([
+                'id' => $this->id,
+                'regionid' => $this->regionid,
+                'departamentoid' => $this->departamentoid,
+                'municipioid' => $this->municipioid,
+            ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+            $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+        }
+        
+
+        
 
         return $dataProvider;
     }

@@ -10,7 +10,8 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "localidad".
  */
 class Localidad extends BaseLocalidad
-{
+{    
+    public $provinciaid; #solo sirve para hacer un join
 
     public function behaviors()
     {
