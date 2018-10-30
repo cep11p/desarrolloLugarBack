@@ -56,4 +56,14 @@ class Lugar extends BaseLugar
             }
         }
     }
+    
+    public function fields() {
+        $resultado = ArrayHelper::merge(parent::fields(), [
+            'localidad'=> function($model){
+                return $model->localidad->nombre;
+            },
+        ]);
+            
+        return $resultado;
+    }
 }
