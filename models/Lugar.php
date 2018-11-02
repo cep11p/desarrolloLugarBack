@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
  */
 class Lugar extends BaseLugar
 {
-    public $globalSearch;
+    public $global_param;
 
     public function behaviors()
     {

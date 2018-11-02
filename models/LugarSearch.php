@@ -19,7 +19,7 @@ class LugarSearch extends Lugar
     {
     return [
         [['id', 'localidadid'], 'integer'],
-        [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto','escalera','globalSearch'], 'safe'],
+        [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto','escalera','global_param'], 'safe'],
     ];
     }
 
@@ -95,8 +95,8 @@ class LugarSearch extends Lugar
             return $dataProvider;
         }
 
-        if ($this->globalSearch){
-        $palabras = explode(" ", $this->globalSearch);
+        if ($this->global_param){
+        $palabras = explode(" ", $this->global_param);
             if(count($palabras)>1){   
 
                 foreach ($palabras as $pa1) {
@@ -108,8 +108,8 @@ class LugarSearch extends Lugar
                     }
                 }
             }else{
-                $query->orFilterWhere(['like', 'calle', $this->globalSearch])
-                    ->orFilterWhere(['like', 'altura', $this->globalSearch]);
+                $query->orFilterWhere(['like', 'calle', $this->global_param])
+                    ->orFilterWhere(['like', 'altura', $this->global_param]);
             }
         }else{
             $query->andFilterWhere([
