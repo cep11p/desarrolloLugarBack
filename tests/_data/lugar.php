@@ -41,6 +41,26 @@ return [
         "localidadid"=>1,
         "latitud"=>"-123123",
         "longitud"=>"321123"
+    ],
+    "lugar5" => [
+        "barrio"=>"Rivadavia",
+        "calle"=>"Av. Perón",
+        "altura"=>"333",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>2,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar6" => [
+        "barrio"=>"Rivadavia",
+        "calle"=>"Zatii",
+        "altura"=>"989",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>2,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
     ]
     
     
