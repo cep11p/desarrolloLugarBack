@@ -17,7 +17,7 @@ return [
         "altura"=>"99",
         "piso"=>"",
         "depto"=>"",
-        "localidadid"=>1,
+        "localidadid"=>2,
         "latitud"=>"-123123",
         "longitud"=>"321123"
     ],
@@ -38,7 +38,7 @@ return [
         "altura"=>"328",
         "piso"=>"",
         "depto"=>"",
-        "localidadid"=>1,
+        "localidadid"=>2,
         "latitud"=>"-123123",
         "longitud"=>"321123"
     ],
