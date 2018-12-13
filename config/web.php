@@ -74,6 +74,9 @@ $config = [
                 ],
                 [   'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/lugar', 
+                    'extraPatterns' => [
+                        'GET buscar-identico' => 'buscar-identico',
+                    ]
                 ],
                 [   'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/municipio', 

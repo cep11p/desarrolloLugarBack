@@ -186,4 +186,23 @@ class LugarController extends ActiveController{
         }
 
     }
+    
+    /**
+     * Vamos a buscar a un lugar identico a los criterios
+     * @return array
+     */
+    public function actionBuscarIdentico()
+    {        
+        $searchModel = new \app\models\LugarSearch();
+        $resultado = $searchModel->buscarIdentico(\Yii::$app->request->queryParams);
+        
+        $data = array();
+        if($resultado->getTotalCount()){            
+            $data = $resultado->models;
+        }
+
+        return $data;
+       
+
+    }
 }
