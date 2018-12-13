@@ -130,41 +130,4 @@ class LugarSearch extends Lugar
 
         return $dataProvider;
     }
-    
-    public function buscarIdentico($params)
-    {
-        $query = Lugar::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $this->load($params,'');
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to any records when validation fails
-            $query->where('0=1');
-            return $dataProvider;
-        }
-
-        
-        $query->andFilterWhere([
-                'id' => $this->id,
-                'localidadid' => (isset($this->localidadid)?$this->localidadid:'null')
-        ]);
-
-        $query->andFilterWhere(['=', 'barrio', (isset($this->barrio)?$this->barrio:'null')])
-            ->andFilterWhere(['=', 'latitud', (isset($this->latitud)?$this->latitud:'null')])
-            ->andFilterWhere(['=', 'longitud', (isset($this->longitud)?$this->longitud:'null')])
-            ->andFilterWhere(['=', 'nombre', (isset($this->calle)?$this->nombre:'null')])
-            ->andFilterWhere(['=', 'calle', (isset($this->calle)?$this->calle:'null')])
-            ->andFilterWhere(['=', 'altura', (isset($this->altura)?$this->altura:'null')])
-            ->andFilterWhere(['=', 'piso', (isset($this->piso)?$this->piso:'null')])
-            ->andFilterWhere(['=', 'depto', (isset($this->depto)?$this->depto:'null')])
-            ->andFilterWhere(['=', 'escalera', (isset($this->escalera)?$this->escalera:'null')]);
-        
-    
-
-        return $dataProvider;
-    }
 }

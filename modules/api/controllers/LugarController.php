@@ -193,16 +193,14 @@ class LugarController extends ActiveController{
      */
     public function actionBuscarIdentico()
     {        
-        $searchModel = new \app\models\LugarSearch();
-        $resultado = $searchModel->buscarIdentico(\Yii::$app->request->queryParams);
+        $model = Lugar::findOne(array_filter(\Yii::$app->request->queryParams));
         
         $data = array();
-        if($resultado->getTotalCount()){            
-            $data = $resultado->models;
+        if(isset($model)){            
+            $data = $model->toArray();
         }
 
-        return $data;
-       
+        return $data;      
 
     }
 }
