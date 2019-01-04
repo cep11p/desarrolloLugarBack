@@ -2,7 +2,8 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=mimysql;dbname=lugar',
+//    'dsn' => 'mysql:host=mimysql;dbname=lugar',
+    'dsn' => 'mysql:host='.getenv('DB_HOST').';dbname='.getenv('DB_NAME'),
     'username' => 'root',
     'password' => 'root',
     'charset' => 'utf8',
