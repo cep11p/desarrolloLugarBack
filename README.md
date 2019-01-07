@@ -45,15 +45,12 @@ INSTALLATION
 
 ### Install via Docker
 
-Antes que nada debemos generar las imagenes de php con el Dockerfile, para ello, 
-
-	*abrimos la siguiente carpera "desarrolloLugarBack/docker/dockerfile/lugar y corremos el siguiente comando
-
-		docker build -t lugar_php:0.1 .
-
 Luego de crear la imagen de php, debemos crear y arrancar los contenedores que son necesario para el ambiente del sistema.
     
    	*Levantamos/Creamos los contenedores
+
+                -sin ambiente
+                docker-compose up -d
 		
 		-ambiente prod
 		docker-compose -p app -f docker-compose.yml -f docker-compose-prod.yml up -d 
