@@ -72,13 +72,13 @@ Creamos el esquema de la bd desde docker
 
 Importamos el sql inicial que se encuentra en /desarrolloLugarBack/bd_inicial
 
-	docker exec -i app_mimysql_1 mysql -u root -p pril < bd_inicial.sql
+	docker exec -i app_mimysql_1 mysql -u root -p lugar < bd_inicial.sql
 
 Realizar los pasos en el siguiente orden:
 
 1- Ahora debemos ejecutar el comando composer install. Como tenemos php en un contenedor debemos ejecutar el mismo comando dentro del contenedor. Para ello debemos 
 entrar al contenedor con el siguiente comando: 
-	docker exec -ti app_lugarphp_1 bash. 
+	docker exec -ti app_lugar_1 bash. 
 Luego ir a la carpeta de la aplicación desde la terminal y correr el comando : 
 	composer install
 
