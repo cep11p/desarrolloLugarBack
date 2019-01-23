@@ -65,12 +65,16 @@ class LugarController extends ActiveController{
     public function prepareDataProvider() 
     {
         $searchModel = new \app\models\LugarSearch();
-//        return $searchModel->busquedadGeneral(\Yii::$app->request->queryParams);
-        $resultado = $searchModel->busquedadGeneral(\Yii::$app->request->queryParams);
-        
+        $params = \Yii::$app->request->queryParams;
+        $resultado = $searchModel->busquedadGeneral($params);
+        $default_pagesize=20;
         $data = array('success'=>false);
         if($resultado->getTotalCount()){
+            $paginas = ceil($resultado->totalCount/((isset($params['pagesize']))?$params['pagesize']:$default_pagesize));
+                    
             $data['success']='true';            
+            $data['paginas']=$paginas;            
+            $data['total_filtrado']=$resultado->totalCount;
             $data['resultado']=$resultado->models;
         }
 
