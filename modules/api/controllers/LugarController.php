@@ -68,12 +68,14 @@ class LugarController extends ActiveController{
         $params = \Yii::$app->request->queryParams;
         $resultado = $searchModel->busquedadGeneral($params);
         $default_pagesize=20;
+        $pagesize=(isset($params['pagesize']))?$params['pagesize']:$default_pagesize;
         $data = array('success'=>false);
         if($resultado->getTotalCount()){
-            $paginas = ceil($resultado->totalCount/((isset($params['pagesize']))?$params['pagesize']:$default_pagesize));
+            $paginas = ceil($resultado->totalCount/$pagesize);
                     
             $data['success']='true';            
-            $data['paginas']=$paginas;            
+            $data['pagesize']=$pagesize;            
+            $data['pages']=$paginas;            
             $data['total_filtrado']=$resultado->totalCount;
             $data['resultado']=$resultado->models;
         }

@@ -321,7 +321,107 @@ return [
         "localidadid"=>3,
         "latitud"=>"-123123",
         "longitud"=>"321123"
-    ]
+    ],
+    "lugar31" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"100",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar32" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"102",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar33" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"104",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar34" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"106",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar35" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"108",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar36" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"110",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar37" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"112",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar38" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"114",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar39" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"116",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
+    "lugar40" => [
+        "barrio"=>"America",
+        "calle"=>"Mexico",
+        "altura"=>"118",
+        "piso"=>"",
+        "depto"=>"",
+        "localidadid"=>3,
+        "latitud"=>"-123123",
+        "longitud"=>"321123"
+    ],
     
     
 ];
