@@ -85,8 +85,7 @@ class LugarController extends ActiveController{
     
     /**
      * Se crea un nuevo lugar. 
-     * Antes de registrar el lugar, se buscara si el lugar existe y se notificará
-     * Para reutilzar el Existe un atributo flag para reutilizar el lugar
+     * Antes de registrar el lugar, se buscara si el lugar existe y para ser reutilizada
      * @return array este array contiene el id y si fue exitoso
      * @throws \yii\web\HttpException
      * @throws Exception
