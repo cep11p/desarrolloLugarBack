@@ -63,7 +63,7 @@ class LocalidadSearch extends Localidad
         ]);
         
         $query->andFilterWhere(['like', 'nombre', $this->nombre]);
-
+        
         return $dataProvider;
     }
     
@@ -108,7 +108,10 @@ class LocalidadSearch extends Localidad
             $query->andFilterWhere(['like', 'nombre', $this->nombre]);
         }
         
-
+        #predeterminadamente vamos a ordenar el nombre alfabeticamente
+        if(!isset($params['sort']) || empty($params['sort'])){
+            $query->orderBy(['nombre' => SORT_ASC]);
+        }
         
 
         return $dataProvider;
