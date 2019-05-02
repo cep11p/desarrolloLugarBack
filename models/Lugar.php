@@ -57,6 +57,12 @@ class Lugar extends BaseLugar
         }
     }
     
+    public function setAttributes($values, $safeOnly = true) {
+        parent::setAttributes($values, $safeOnly);
+        $this->barrio = strtolower($this->barrio);
+        $this->calle = strtolower($this->calle);
+    }
+    
     public function fields() {
         $resultado = ArrayHelper::merge(parent::fields(), [
             'localidad'=> function($model){
