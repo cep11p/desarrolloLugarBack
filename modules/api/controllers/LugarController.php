@@ -98,19 +98,11 @@ class LugarController extends ActiveController{
         $arrayErrors = array();
         try {
        
-            $model = new Lugar;
-            $model->setAttributes($param);
-            $model->id = '';
-//            if(isset($param['usarLugarEncontrado']) && $param['usarLugarEncontrado']==true){
-                
-            $model = Lugar::findOne(array_filter($model->attributes));
-
+            $model = Lugar::buscarIdentico($param);
             if($model==null){
                 $model = new Lugar;
                 $model->setAttributes($param);
             }
-//            }
-            
             
             if(!$model->save()){
                 $arrayErrors['lugar']=$model->getErrors();
@@ -198,7 +190,7 @@ class LugarController extends ActiveController{
      */
     public function actionBuscarIdentico()
     {        
-        $model = Lugar::findOne(array_filter(\Yii::$app->request->queryParams));
+        $model = Lugar::buscarIdentico(\Yii::$app->request->queryParams);
         
         $data = array();
         if(isset($model)){            

@@ -57,12 +57,33 @@ class Lugar extends BaseLugar
         }
     }
     
-    public function setAttributes($values, $safeOnly = true) {
-        parent::setAttributes($values, $safeOnly);
+    public function setAttributes($values, $safeOnly = true){
+        $params = $this->limpiarParametrosConEspacios($values);
+        parent::setAttributes($params, $safeOnly);
         $this->barrio = strtolower($this->barrio);
         $this->calle = strtolower($this->calle);
     }
     
+    /**
+     * Limpia los espacios que hay en un string en un array asociativo
+     * @param array $values
+     */
+    private function limpiarParametrosConEspacios($values){
+        $resultado = array();
+        foreach ($values as $key => $value) {
+            $porciones = explode(" ", $value);
+            
+            $cadena = '';
+            foreach ($porciones as $val) {
+                $cadena .= ($cadena=='' || empty($val))?'':' ';
+                $cadena .= (!empty($val))?$val:'';
+            }
+            $resultado[$key] = $cadena;
+        }
+            
+        return $resultado;
+    }
+
     public function fields() {
         $resultado = ArrayHelper::merge(parent::fields(), [
             'localidad'=> function($model){
@@ -70,6 +91,30 @@ class Lugar extends BaseLugar
             },
         ]);
             
+        return $resultado;
+    }
+    
+    /**
+     * 
+     * @param array $param
+     * @return Lugar()
+     */
+    public static function buscarIdentico($param = array()) {
+        $condition = array();
+        $model = new Lugar();
+        $model->setAttributes($param);
+        
+        foreach ($model->attributes as $key=>$value) {
+            if(isset($value) && !empty($value)){
+                $condition = ArrayHelper::merge($condition, [$key=>$value]);
+            }else{
+                $condition = ArrayHelper::merge($condition, [$key=>'']);
+            }
+        }
+        
+        unset($condition['id']);
+        
+        $resultado = Lugar::findByCondition($condition)->one();
         return $resultado;
     }
 }
