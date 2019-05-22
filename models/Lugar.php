@@ -95,7 +95,7 @@ class Lugar extends BaseLugar
     }
     
     /**
-     * 
+     * Se busca un lugar identico
      * @param array $param
      * @return Lugar()
      */

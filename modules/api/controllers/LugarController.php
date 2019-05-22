@@ -95,7 +95,6 @@ class LugarController extends ActiveController{
         $resultado['message']='Se guarda un Lugar';
         $param = Yii::$app->request->post();
         $transaction = Yii::$app->db->beginTransaction();
-        $arrayErrors = array();
         try {
        
             $model = Lugar::buscarIdentico($param);
@@ -104,10 +103,8 @@ class LugarController extends ActiveController{
                 $model->setAttributes($param);
             }
             
-            if(!$model->save()){
-                $arrayErrors['lugar']=$model->getErrors();
-                $arrayErrors['tab']='lugar';                
-                throw new Exception(json_encode($arrayErrors));
+            if(!$model->save()){             
+                throw new Exception(json_encode($model->getErrors()));
             }            
             
             $transaction->commit();
@@ -118,65 +115,6 @@ class LugarController extends ActiveController{
             return  $resultado;
            
         }catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            $transaction->rollBack();
-            $mensaje =$exc->getMessage();
-            throw new \yii\web\HttpException(500, $mensaje);
-        }
-
-    }
-    
-    public function actionUpdate($id)
-    {
-        $resultado['message']='Se guarda un Lugar';
-        $param = Yii::$app->request->post();
-        $transaction = Yii::$app->db->beginTransaction();
-        $arrayErrors = array();
-        try {
-       
-            $model = new Lugar;
-            $model = $model->findOne(['id'=>$id]);
-            if($model==null){
-                $msj="El Lugar con el id $id no existe";
-                throw new Exception($msj);
-            }
-            
-            $modeloAnterior = $model->toArray();
-            
-            #renovamos los atributos
-            $model->setAttributes($param);
-            
-            ###### Regla de negocio #######
-            #Regla N1: Se debe modificar el lugar si solo tienen la misma cantidad de atributo, caso contrario, si tienen menos atributos o mas 
-            #atributos nuevos se debe crear un atributo completamente nuevo, ya que existen lugares
-            # Si se agregan mas o menos atributos quiere decir que es otro Lugar distinto
-            if(count(array_filter($modeloAnterior)) < count(array_filter($model->toArray()))){
-                $notificacion = "Se agrega un nuevo lugar con datos mas especificos";
-                $model = new Lugar();
-                $model->setAttributes($param);
-            }elseif(count(array_filter($modeloAnterior)) > count(array_filter($model->toArray()))){
-                $notificacion = "Se agrega un nuevo lugar con datos mas especificos";
-                $model = new Lugar();
-                $model->setAttributes($param);
-            }
-            ###### Fin de regla de negocio #######
-            
-            
-            if(!$model->save()){
-                $arrayErrors['lugar']=$model->getErrors();
-                $arrayErrors['tab']='lugar';                
-                throw new Exception(json_encode($arrayErrors));
-            }            
-            
-            $transaction->commit();
-            
-            $resultado['success']=true;
-            $resultado['data']['id']=$model->id;
-            
-            return  $resultado;
-           
-        }catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
             $transaction->rollBack();
             $mensaje =$exc->getMessage();
             throw new \yii\web\HttpException(500, $mensaje);
