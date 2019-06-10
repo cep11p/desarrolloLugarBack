@@ -438,4 +438,130 @@ class LugarCest
             ]
         ]);
     }
+    public function filtrarLugaresPorIds(ApiTester $I)
+    {
+        $I->wantTo('Filtrar lugares por Ids');
+        
+        $I->sendGET('/api/lugars?ids=10,11,3,6,9,45,16');
+        $I->seeResponseContainsJson([            
+            "success"=> "true",
+            "pagesize"=> 20,
+            "pages"=> 1,
+            "total_filtrado"=> 7,
+            "resultado"=> [
+                [
+                    "id"=> 3,
+                    "nombre"=> "",
+                    "calle"=> "calle3",
+                    "altura"=> "",
+                    "localidadid"=> 2540,
+                    "latitud"=> "-1234121",
+                    "longitud"=> "21314126",
+                    "barrio"=> "barrio3",
+                    "piso"=> "2º",
+                    "depto"=> "C",
+                    "escalera"=> "escalera3",
+                    "entre_calle_1"=> "Entrecalle3",
+                    "entre_calle_2"=> "Entrecalle-101",
+                    "localidad"=> "Mallin Ahogado"
+                ],
+                [
+                    "id"=> 6,
+                    "nombre"=> "",
+                    "calle"=> "calle6",
+                    "altura"=> "",
+                    "localidadid"=> 2543,
+                    "latitud"=> "-1234118",
+                    "longitud"=> "21314129",
+                    "barrio"=> "barrio6",
+                    "piso"=> "5º",
+                    "depto"=> "1",
+                    "escalera"=> "escalera6",
+                    "entre_calle_1"=> "Entrecalle6",
+                    "entre_calle_2"=> "Entrecalle-98",
+                    "localidad"=> "El Foyel"
+                ],
+                [
+                    "id"=> 9,
+                    "nombre"=> "",
+                    "calle"=> "calle9",
+                    "altura"=> "",
+                    "localidadid"=> 2546,
+                    "latitud"=> "-1234115",
+                    "longitud"=> "21314132",
+                    "barrio"=> "barrio9",
+                    "piso"=> "8º",
+                    "depto"=> "4",
+                    "escalera"=> "escalera9",
+                    "entre_calle_1"=> "Entrecalle9",
+                    "entre_calle_2"=> "Entrecalle-95",
+                    "localidad"=> "Cona Niyeu"
+                ],
+                [
+                    "id"=> 10,
+                    "nombre"=> "",
+                    "calle"=> "calle10",
+                    "altura"=> "",
+                    "localidadid"=> 2547,
+                    "latitud"=> "-1234114",
+                    "longitud"=> "21314133",
+                    "barrio"=> "barrio1",
+                    "piso"=> "9º",
+                    "depto"=> "5",
+                    "escalera"=> "escalera10",
+                    "entre_calle_1"=> "Entrecalle10",
+                    "entre_calle_2"=> "Entrecalle-94",
+                    "localidad"=> "Falckner"
+                ],
+                [
+                    "id"=> 11,
+                    "nombre"=> "",
+                    "calle"=> "calle11",
+                    "altura"=> "",
+                    "localidadid"=> 2548,
+                    "latitud"=> "-1234113",
+                    "longitud"=> "21314134",
+                    "barrio"=> "barrio2",
+                    "piso"=> "10º",
+                    "depto"=> "6",
+                    "escalera"=> "escalera11",
+                    "entre_calle_1"=> "Entrecalle11",
+                    "entre_calle_2"=> "Entrecalle-93",
+                    "localidad"=> "Ganzu Lauquen"
+                ],
+                [
+                    "id"=> 16,
+                    "nombre"=> "",
+                    "calle"=> "calle16",
+                    "altura"=> "",
+                    "localidadid"=> 2553,
+                    "latitud"=> "-1234108",
+                    "longitud"=> "21314139",
+                    "barrio"=> "barrio7",
+                    "piso"=> "15º",
+                    "depto"=> "C",
+                    "escalera"=> "escalera16",
+                    "entre_calle_1"=> "Entrecalle16",
+                    "entre_calle_2"=> "Entrecalle-88",
+                    "localidad"=> "Chocori"
+                ],
+                [
+                    "id"=> 45,
+                    "nombre"=> "",
+                    "calle"=> "calle5",
+                    "altura"=> "",
+                    "localidadid"=> 2548,
+                    "latitud"=> "-2999997",
+                    "longitud"=> "12345263",
+                    "barrio"=> "barrio9",
+                    "piso"=> "0º",
+                    "depto"=> "4",
+                    "escalera"=> "escalera45",
+                    "entre_calle_1"=> "Entrecalle45",
+                    "entre_calle_2"=> "Entrecalle-59",
+                    "localidad"=> "Ganzu Lauquen"
+                ]
+            ]
+        ]);
+    }
 }
