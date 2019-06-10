@@ -438,6 +438,7 @@ class LugarCest
             ]
         ]);
     }
+    
     public function filtrarLugaresPorIds(ApiTester $I)
     {
         $I->wantTo('Filtrar lugares por Ids');
@@ -560,6 +561,133 @@ class LugarCest
                     "entre_calle_1"=> "Entrecalle45",
                     "entre_calle_2"=> "Entrecalle-59",
                     "localidad"=> "Ganzu Lauquen"
+                ]
+            ]
+        ]);
+    }
+    
+    public function filtrarLugaresPorLocalidad(ApiTester $I)
+    {
+        $I->wantTo('Filtrar lugares por localidad');
+        
+        $I->sendGET('/api/lugars?localidadid=2538');
+        $I->seeResponseContainsJson([            
+            "success"=> "true",
+            "pagesize"=> 20,
+            "pages"=> 1,
+            "total_filtrado"=> 7,
+            "resultado"=> [
+                [
+                    "id"=> 1,
+                    "nombre"=> "",
+                    "calle"=> "calle1",
+                    "altura"=> "100",
+                    "localidadid"=> 2538,
+                    "latitud"=> "-1234123",
+                    "longitud"=> "21314124",
+                    "barrio"=> "barrio1",
+                    "piso"=> "0º",
+                    "depto"=> "A",
+                    "escalera"=> "escalera1",
+                    "entre_calle_1"=> "Entrecalle1",
+                    "entre_calle_2"=> "Entrecalle-103",
+                    "localidad"=> "El Bolson"
+                ],
+                [
+                    "id"=> 18,
+                    "nombre"=> "",
+                    "calle"=> "calle18",
+                    "altura"=> "",
+                    "localidadid"=> 2538,
+                    "latitud"=> "-1234106",
+                    "longitud"=> "21314141",
+                    "barrio"=> "barrio9",
+                    "piso"=> "17º",
+                    "depto"=> "F",
+                    "escalera"=> "escalera18",
+                    "entre_calle_1"=> "Entrecalle18",
+                    "entre_calle_2"=> "Entrecalle-86",
+                    "localidad"=> "El Bolson"
+                ],
+                [
+                    "id"=> 35,
+                    "nombre"=> "",
+                    "calle"=> "calle15",
+                    "altura"=> "",
+                    "localidadid"=> 2538,
+                    "latitud"=> "-1234089",
+                    "longitud"=> "12345253",
+                    "barrio"=> "barrio8",
+                    "piso"=> "",
+                    "depto"=> "6",
+                    "escalera"=> "escalera35",
+                    "entre_calle_1"=> "Entrecalle35",
+                    "entre_calle_2"=> "Entrecalle-69",
+                    "localidad"=> "El Bolson"
+                ],
+                [
+                    "id"=> 52,
+                    "nombre"=> "",
+                    "calle"=> "calle12",
+                    "altura"=> "",
+                    "localidadid"=> 2538,
+                    "latitud"=> "-2999990",
+                    "longitud"=> "12345270",
+                    "barrio"=> "barrio7",
+                    "piso"=> "5º",
+                    "depto"=> "11",
+                    "escalera"=> "escalera52",
+                    "entre_calle_1"=> "Entrecalle52",
+                    "entre_calle_2"=> "Entrecalle-52",
+                    "localidad"=> "El Bolson"
+                ],
+                [
+                    "id"=> 69,
+                    "nombre"=> "",
+                    "calle"=> "calle9",
+                    "altura"=> "",
+                    "localidadid"=> 2538,
+                    "latitud"=> "-2999973",
+                    "longitud"=> "12423522",
+                    "barrio"=> "barrio6",
+                    "piso"=> "",
+                    "depto"=> "D",
+                    "escalera"=> "escalera69",
+                    "entre_calle_1"=> "Entrecalle69",
+                    "entre_calle_2"=> "Entrecalle-35",
+                    "localidad"=> "El Bolson"
+                ],
+                [
+                    "id"=> 86,
+                    "nombre"=> "",
+                    "calle"=> "calle6",
+                    "altura"=> "",
+                    "localidadid"=> 2538,
+                    "latitud"=> "-2999956",
+                    "longitud"=> "12423539",
+                    "barrio"=> "barrio5",
+                    "piso"=> "0º",
+                    "depto"=> "9",
+                    "escalera"=> "escalera86",
+                    "entre_calle_1"=> "Entrecalle86",
+                    "entre_calle_2"=> "Entrecalle-18",
+                    "localidad"=> "El Bolson"
+                ],
+                [
+                    "id"=> 103,
+                    "nombre"=> "",
+                    "calle"=> "calle3",
+                    "altura"=> "",
+                    "localidadid"=> 2538,
+                    "latitud"=> "-2999939",
+                    "longitud"=> "12423556",
+                    "barrio"=> "barrio4",
+                    "piso"=> "10º",
+                    "depto"=> "14",
+                    "escalera"=> "escalera103",
+                    "entre_calle_1"=> "Entrecalle103",
+                    "entre_calle_2"=> "Entrecalle-1",
+                    "localidad"=> "El Bolson"
                 ]
             ]
         ]);
