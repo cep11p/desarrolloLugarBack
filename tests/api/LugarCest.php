@@ -104,6 +104,27 @@ class LugarCest
         ]);
     }
     
+    public function verLugar(ApiTester $I)
+    {
+        $I->wantTo('Se visualiza un lugar');        
+        
+        $I->sendGET('/api/lugars/7');
+        $I->seeResponseContainsJson([
+            'barrio'=>'barrio7',
+            'calle'=>'calle7',
+            'altura'=>'',
+            'piso'=>'6º',
+            'depto'=>'2',
+            'localidadid'=>2544,
+            'latitud'=>'-1234117',
+            'longitud'=>'21314130',
+            'escalera'=>'escalera7',
+            'entre_calle_1'=>'Entrecalle7',
+            'entre_calle_2'=>'Entrecalle-97',
+            'localidad'=> 'General Conesa'
+        ]);
+    }
+    
     public function listarLugar(ApiTester $I)
     {
         $I->wantTo('Lista de lugares');
