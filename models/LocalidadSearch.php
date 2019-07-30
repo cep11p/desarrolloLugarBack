@@ -85,7 +85,10 @@ class LocalidadSearch extends Localidad
         }
         
         
-        if(isset($this->provinciaid)){
+        if(isset ($params['ids']) && !empty ($params['ids'])){
+            $lista_id = explode(",", $params['ids']);
+            $query->andWhere(array('in', 'id', $lista_id));
+        }else if(isset($this->provinciaid)){
             $query->leftJoin("departamento as d", "departamentoid=d.id");
             
             $query->andFilterWhere([
