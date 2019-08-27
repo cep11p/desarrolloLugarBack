@@ -62,6 +62,10 @@ class LugarCest
         ]);
     }
     
+    /**
+     * Esta operacion no debe fallar...sino dar el id del lugar existente para reutilizarlo
+     * @param ApiTester $I
+     */
     public function crearLugarExistente(ApiTester $I)
     {
         $I->wantTo('Se crea un Lugar Existente');
@@ -72,7 +76,7 @@ class LugarCest
             'altura'=>'',
             'piso'=>'6º',
             'depto'=>'2',
-            'localidadid'=>2544,
+            'localidadid'=>2555,
             'latitud'=>'-1234117',
             'longitud'=>'21314130',
             'escalera'=>'escalera7',
@@ -95,7 +99,7 @@ class LugarCest
             'altura'=>'',
             'piso'=>'6º',
             'depto'=>'2',
-            'localidadid'=>2544,
+            'localidadid'=>2555,
             'latitud'=>'-1234117',
             'longitud'=>'21314130',
             'escalera'=>'escalera7',
@@ -115,7 +119,7 @@ class LugarCest
             'altura'=>'',
             'piso'=>'6º',
             'depto'=>'2',
-            'localidadid'=>2544,
+            'localidadid'=>2555,
             'latitud'=>'-1234117',
             'longitud'=>'21314130',
             'escalera'=>'escalera7',
@@ -134,7 +138,7 @@ class LugarCest
             "success"=> "true",
             "pagesize"=> 20,
             "pages"=> 6,
-            "total_filtrado"=> 104,
+            "total_filtrado"=> 103,
             "resultado"=> [
                 [
                     "id"=> 1,
@@ -237,7 +241,7 @@ class LugarCest
                     "nombre"=> "",
                     "calle"=> "calle7",
                     "altura"=> "",
-                    "localidadid"=> 2544,
+                    "localidadid"=> 2555,
                     "latitud"=> "-1234117",
                     "longitud"=> "21314130",
                     "barrio"=> "barrio7",
@@ -572,7 +576,7 @@ class LugarCest
                     "nombre"=> "",
                     "calle"=> "calle5",
                     "altura"=> "",
-                    "localidadid"=> 2548,
+                    "localidadid"=> 3976,
                     "latitud"=> "-2999997",
                     "longitud"=> "12345263",
                     "barrio"=> "barrio9",
@@ -581,7 +585,7 @@ class LugarCest
                     "escalera"=> "escalera45",
                     "entre_calle_1"=> "Entrecalle45",
                     "entre_calle_2"=> "Entrecalle-59",
-                    "localidad"=> "Ganzu Lauquen"
+                    "localidad"=> "Aguada de Guerra"
                 ]
             ]
         ]);
