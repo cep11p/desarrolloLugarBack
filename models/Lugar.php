@@ -57,6 +57,11 @@ class Lugar extends BaseLugar
         }
     }
     
+    /**
+     * Se realiza un un registro de lugar con atributos de string en minuscula
+     * @param type $values
+     * @param type $safeOnly
+     */
     public function setAttributes($values, $safeOnly = true){
         $params = $this->limpiarParametrosConEspacios($values);
         parent::setAttributes($params, $safeOnly);
