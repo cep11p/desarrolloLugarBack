@@ -31,13 +31,15 @@ $config = [
     'modules' => [
         'rbac' => 'dektrium\rbac\RbacConsoleModule',
     ],
-    /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
-        ],
+//            'class' => 'yii\faker\FixtureController', //esto estaba antes!!
+            'class' => 'yii\console\controllers\FixtureController',
+            'namespace' => 'app\tests\fixtures',
+            
+        ]
+        
     ],
-    */
 ];
 
 if (YII_ENV_DEV) {
