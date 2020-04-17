@@ -96,7 +96,7 @@ class LugarController extends ActiveController{
         $param = Yii::$app->request->post();
         $transaction = Yii::$app->db->beginTransaction();
         try {
-       
+            set_time_limit(0);
             $model = Lugar::buscarIdentico($param);
             if($model==null){
                 $model = new Lugar;
