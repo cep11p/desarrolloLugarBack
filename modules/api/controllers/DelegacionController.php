@@ -46,4 +46,25 @@ class DelegacionController extends ActiveController{
 
         return $behaviors;
     }
+    
+        public function actions()
+    {
+        $actions = parent::actions();
+        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+        return $actions;
+    }
+    
+    public function prepareDataProvider() 
+    {
+        $searchModel = new \app\models\DelegacionSearch();
+        $resultado = $searchModel->busquedaGeneral(\Yii::$app->request->queryParams);
+        
+        $data = array('success'=>false);
+        if($resultado->getTotalCount()){
+            $data['success']=true;            
+            $data['resultado']=$resultado->models;
+        }
+
+        return $data;
+    }  
 }
