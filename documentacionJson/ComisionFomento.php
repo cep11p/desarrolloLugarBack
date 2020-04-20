@@ -2,8 +2,11 @@
 
 /**** Para mostrar listado ****/
 /**
+ * Se obtiene un listado. En la url podremos agregar atributos dsp de ? por ejemplo 
+ * ?pagesize=3 dimensiona
+ * ?nombre=aguada se filtra por nombre
 * @url http://lugar.local/api/comision-fomentos
-* @method 
+* @method GET
 * @arrayReturn
     [
         {
