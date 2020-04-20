@@ -59,10 +59,9 @@ class DelegacionController extends ActiveController{
         $searchModel = new \app\models\DelegacionSearch();
         $resultado = $searchModel->busquedaGeneral(\Yii::$app->request->queryParams);
         
-        $data = array('success'=>false);
+        $data = array();
         if($resultado->getTotalCount()){
-            $data['success']=true;            
-            $data['resultado']=$resultado->models;
+            $data=$resultado->models;
         }
 
         return $data;
