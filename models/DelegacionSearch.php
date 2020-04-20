@@ -69,6 +69,11 @@ class DelegacionSearch extends Delegacion
         $query = Delegacion::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => $params['pagesize'],
+                'pageSize' => (isset($params['pagesize']) && is_numeric($params['pagesize']))?$params['pagesize']:20,
+                'page' => (isset($params['page']) && is_numeric($params['page']))?$params['page']:0
+            ],
         ]);
 
         $this->load($params,'');
