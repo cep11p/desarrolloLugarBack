@@ -3,6 +3,9 @@
 /**** Para mostrar listado ****/
 /**
 * @url http://lugar.local/api/delegacion
+* Se obtiene un listado. En la url podremos agregar atributos dsp de ? por ejemplo 
+* ?pagesize=3 dimensiona
+* ?nombre=aguada se filtra por nombre
 * @method GET
 
 [
