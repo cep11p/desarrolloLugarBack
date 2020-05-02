@@ -93,6 +93,9 @@ $config = [
                 [   'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/region', 
                 ],
+                [   'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/parametro', 
+                ],
             ],
         ],
         
