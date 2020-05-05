@@ -95,6 +95,10 @@ $config = [
                 ],
                 [   'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/parametro', 
+                    'extraPatterns' => [
+                        'OPTIONS lista' => 'lista',
+                        'POST lista' => 'lista'
+                    ]
                 ],
             ],
         ],

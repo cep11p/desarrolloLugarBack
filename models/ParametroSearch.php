@@ -11,49 +11,117 @@ use yii\data\ActiveDataProvider;
 */
 class ParametroSearch
 {
-    
-    public function busquedaGeneral($params)
+    /**
+     * Se realiza un pedido de parametros teniendo seteado el nombre de la tabla y sus id requeridos
+     * @param array $params
+     * @return array
+     */
+    public function getColeccionPorListaIds($params)
     {
-        $tables = explode(",", $params['tables']);
+        $resultado = [];
+        $coleccion = $this->getListasPorColeccionIds($params);
+        if(count($coleccion)>0){        
+            $resultado = $coleccion;
+        }
+        return $resultado;
+    }
+    
+    /**
+     * Se piden un listado total de delegacion, municipio, comision de fomento, localidad y lugar
+     * @return array
+     */
+    public function getColeccionLista()
+    {
+        $query = \yii\db\ActiveRecord::find();
+        $query->select([
+            'id'=>'id',
+            'nombre'=>'nombre',
+        ]);
+        $query->from(['localidad']);
+
+        $command = $query->createCommand();
+
+        $rows = $command->queryAll();
+
+        $resultado['localidad'] = $rows;
         
-        $coleccion = $this->getListas($tables);
-        $resultado['delegacion'] = $coleccion;
+        $query->select([
+            'id'=>'id',
+            'nombre'=>'nombre',
+        ]);
+        $query->from(['delegacion']);
+
+        $command = $query->createCommand();
+
+        $rows = $command->queryAll();
+
+        $resultado['delegacion'] = $rows;
+        
+        $query->select([
+            'id'=>'id',
+            'nombre'=>'nombre',
+        ]);
+        $query->from(['municipio']);
+
+        $command = $query->createCommand();
+
+        $rows = $command->queryAll();
+
+        $resultado['municipio'] = $rows;
+        
+        $query->select([
+            'id'=>'id',
+            'nombre'=>'nombre',
+        ]);
+        $query->from(['comision_fomento']);
+
+        $command = $query->createCommand();
+
+        $rows = $command->queryAll();
+
+        $resultado['comision_fomento'] = $rows;
+        
+        $query->select([]);
+        $query->from(['lugar']);
+
+        $command = $query->createCommand();
+
+        $rows = $command->queryAll();
+
+        $resultado['lugar'] = $rows;
+        
         
         return $resultado;
     }
     
-    private function getLista($table)
+    /**
+     * Se pide una coleccion de parametros 
+     * @param array $tables lista de tablas con sus ids requeridos
+     * @return array
+     */
+    private function getListasPorColeccionIds($tables)
     {
         $resultado = [];
-        $query = \yii\db\ActiveRecord::find();
-        $existeTable = $query->createCommand()->setSql("SHOW TABLES LIKE '".$table."'")->queryOne();
-        
-        if (!empty($existeTable)){
-            $query->select([
-                'id'=>'id',
-                'nombre'=>'nombre',
-            ]);
-            $query->from([$table]);
+        foreach ($tables as $key => $value) {
+            $query = \yii\db\ActiveRecord::find();
+            $existeTable = $query->createCommand()->setSql("SHOW TABLES LIKE '".$key."'")->queryOne();
 
-            $command = $query->createCommand();
-            
-            $rows = $command->queryAll();
-            
-            $resultado = $rows;
+            if (!empty($existeTable)){
+                $query->select([
+                    'id'=>'id',
+                    'nombre'=>'nombre',
+                ]);
+                $query->from([$key]);
+                $query->andWhere(array('in', 'id', $value));
+                $command = $query->createCommand();
+
+                $rows = $command->queryAll();
+                
+                if(count($rows)>0){
+                    $resultado[$key] = $rows;
+                } 
+            }        
         }
-        
-        return $resultado; 
-    }
-    
-    private function getListas($tables)
-    {
-        foreach ($tables as $value) {
-            $lista = $this->getLista($value);
-            if(count($lista)>0){
-                $resultado[$value] = $lista;
-            }            
-        }
-        
         return $resultado;
     }
 }
