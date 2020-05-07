@@ -27,10 +27,85 @@ class ParametroSearch
     }
     
     /**
-     * Se piden un listado total de delegacion, municipio, comision de fomento, localidad y lugar
+     * Se pide un listado total de delegacion, municipio, comision de fomento, localidad y lugar
      * @return array
      */
-    public function getColeccionLista()
+    public function getColeccionLista($params = array())
+    {
+        $resultado = [];
+        if(!empty($params)){
+            $coleccion_lista = explode(',', $params['lista']);
+            $resultado = $this->getListaPorParametros($coleccion_lista);
+        }else{
+            $resultado = $this->getAllParams();
+        }
+
+        return $resultado;
+    }
+    
+    /**
+     * Se pide una coleccion de parametros 
+     * @param array $tables lista de tablas con sus ids requeridos
+     * @param array $tables['delegacion'][20,21,23] lista de delegaciones filtradas por id
+     * @param array $tables['comison_fomento'][] lista completa 
+     * @param array $tables['lugar'][] lista completa
+     * @param array $tables['municipio'][] lista completa
+     * @param array $tables['localidad'][] lista completa
+     * @return array
+     */
+    private function getListasPorColeccionIds($tables)
+    {
+        $resultado = [];
+        foreach ($tables as $key => $value) {
+            $query = \yii\db\ActiveRecord::find();
+            $existeTable = $query->createCommand()->setSql("SHOW TABLES LIKE '".$key."'")->queryOne();
+
+            if (!empty($existeTable)){
+                $query->select([
+                    'id'=>'id',
+                    'nombre'=>'nombre',
+                ]);
+                $query->from([$key]);
+                if(count($value)>0){
+                    $query->andWhere(array('in', 'id', $value));
+                }
+                $command = $query->createCommand();
+                $rows = $command->queryAll();
+                if(count($rows)>0){
+                    $resultado[$key] = $rows;
+                } 
+            }        
+        }
+        
+        return $resultado;
+    }
+    
+    private function getListaPorParametros($tables)
+    {
+        $resultado = [];
+        foreach ($tables as $key) {
+            $query = \yii\db\ActiveRecord::find();
+            $existeTable = $query->createCommand()->setSql("SHOW TABLES LIKE '".$key."'")->queryOne();
+
+            if (!empty($existeTable)){
+                $query->select([
+                    'id'=>'id',
+                    'nombre'=>'nombre',
+                ]);
+                $query->from([$key]);
+                $command = $query->createCommand();
+
+                $rows = $command->queryAll();
+                
+                if(count($rows)>0){
+                    $resultado[$key] = $rows;
+                } 
+            }        
+        }
+        return $resultado;
+    }
+    
+    private function getAllParams()
     {
         $query = \yii\db\ActiveRecord::find();
         $query->select([
@@ -91,37 +166,6 @@ class ParametroSearch
         $resultado['lugar'] = $rows;
         
         
-        return $resultado;
-    }
-    
-    /**
-     * Se pide una coleccion de parametros 
-     * @param array $tables lista de tablas con sus ids requeridos
-     * @return array
-     */
-    private function getListasPorColeccionIds($tables)
-    {
-        $resultado = [];
-        foreach ($tables as $key => $value) {
-            $query = \yii\db\ActiveRecord::find();
-            $existeTable = $query->createCommand()->setSql("SHOW TABLES LIKE '".$key."'")->queryOne();
-
-            if (!empty($existeTable)){
-                $query->select([
-                    'id'=>'id',
-                    'nombre'=>'nombre',
-                ]);
-                $query->from([$key]);
-                $query->andWhere(array('in', 'id', $value));
-                $command = $query->createCommand();
-
-                $rows = $command->queryAll();
-                
-                if(count($rows)>0){
-                    $resultado[$key] = $rows;
-                } 
-            }        
-        }
         return $resultado;
     }
 }

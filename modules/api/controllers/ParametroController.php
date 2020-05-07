@@ -64,21 +64,22 @@ class ParametroController extends ActiveController{
     {
         $searchModel = new \app\models\ParametroSearch();
         $params = \Yii::$app->request->queryParams;
-        $resultado = $searchModel->getColeccionLista();          
+        $resultado = $searchModel->getColeccionLista($params);          
         
         return $resultado;
     }   
     
     /**
+     * Se obtiene una coleccion de parametros lugar, localidad, delegacion, comision_fomento, municipio
      * @param arrayJson
         {
             "delegacion": [{"id":1},{"id":2},{"id":3}],
             "localidad": [{"id":1},{"id":2},{"id":3}],
-            "municipio": [{"id":1},{"id":2},{"id":3}],
+            "municipio": [],
             "comision_fomento": [{"id":1},{"id":2},{"id":3}],
             "lugar": [{"id":1},{"id":2},{"id":3}]
         }
-     * @return type
+     * @return array
      */
     public function actionLista() 
     {
