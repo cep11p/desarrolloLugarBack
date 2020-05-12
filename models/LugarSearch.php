@@ -19,7 +19,7 @@ class LugarSearch extends Lugar
     {
     return [
         [['id', 'localidadid'], 'integer'],
-        [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto','escalera','global_param'], 'safe'],
+        [['nombre', 'calle', 'altura', 'latitud', 'longitud', 'barrio', 'piso', 'depto','escalera','direccion'], 'safe'],
     ];
     }
 
@@ -102,35 +102,14 @@ class LugarSearch extends Lugar
         if(isset ($params['ids']) && !empty ($params['ids'])){
             $lista_id = explode(",", $params['ids']);
             $query->andWhere(array('in', 'id', $lista_id));
-        }else if ($this->global_param){
-            $palabras = explode(" ", $this->global_param);
-            if(count($palabras)>1){   
-
-                foreach ($palabras as $pa1) {
-
-                    foreach ($palabras as $pa2) {
-                        $query->orFilterWhere(['and',
-                        ['like','calle',$pa1],
-                        ['like','altura',$pa2]]);
-                    }
-                }
-            }else{
-                $query->orFilterWhere(['like', 'calle', $this->global_param])
-                    ->orFilterWhere(['like', 'altura', $this->global_param]);
-            }
         }else{
-            $query->andFilterWhere([
-                    'id' => $this->id,
-                    'localidadid' => $this->localidadid
-            ]);
+            $query->andFilterWhere(['localidadid' => $this->localidadid]);
 
-            $query->andFilterWhere(['=', 'barrio', $this->barrio])
-                ->andFilterWhere(['like', 'calle', $this->calle])
-                ->andFilterWhere(['like', 'altura', $this->altura])
-                ->andFilterWhere(['like', 'piso', $this->piso])
-                ->andFilterWhere(['like', 'depto', $this->depto]);
+            $query->andFilterWhere(['like', "concat(calle,' ',altura)", $this->direccion]);
+            $query->andFilterWhere(['like', 'barrio', $this->barrio]);
         }
-    
+        
+//        die($query->createCommand()->sql);
 
         return $dataProvider;
     }

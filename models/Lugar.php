@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
  */
 class Lugar extends BaseLugar
 {
-    public $global_param;
+    public $direccion;
 
     public function behaviors()
     {
