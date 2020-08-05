@@ -1,21 +1,51 @@
 version: '2'
 
 services:
-  lugarphp:
-    image:  lugar_php:0.1
-    ports:
-      - 80:80
+    
+##### LUGAR
+  lugar:
+    image: php_yii_ds
     volumes:
-      - /var/www/html:/var/www/html
-    networks:
-       default:
-           aliases:
-             - api.lugar.local
-  mimysql:
-    image: mysql
+      - ../:/var/www/html
+#    networks:
+#      - backend
+    environment:
+      DB_HOST: 'lugar_db'
+      DB_NAME: 'lugar'
+    labels:
+     - "traefik.backend=lugar"
+     - "traefik.frontend.rule=Host:lugar.local"
+     - "traefik.port=80"
+
+  lugar_db:
+    image: mariadb:10.4
     ports:
-      - 3306:3306
+     - 3309:3306
+#    networks:
+#      - backend
     environment:
      MYSQL_ROOT_PASSWORD: root
+     MYSQL_ROOT_HOST: '%'
     volumes:
-     - /dbdata:/var/lib/mysql
+     - ./../../dbdata:/var/lib/mysql
+     
+##### PROXY
+
+  proxy:
+    image: traefik:1.7.6
+    restart: always
+    command: --web --docker --docker.domain=local
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/proxy/traefik.toml:/etc/traefik/traefik.toml
+    labels:
+     - "traefik.backend=proxy"
+     - "traefik.frontend.rule=Host:proxy.local"
+     - "traefik.port=8080"
+#    networks:
+#     - backend
+     
+#networks:
+#  backend:
