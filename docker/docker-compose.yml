@@ -7,8 +7,8 @@ services:
     image: php_yii_ds
     volumes:
       - ../:/var/www/html
-#    networks:
-#      - backend
+    networks:
+      - backend
     environment:
       DB_HOST: 'lugar_db'
       DB_NAME: 'lugar'
@@ -21,8 +21,8 @@ services:
     image: mariadb:10.4
     ports:
      - 3309:3306
-#    networks:
-#      - backend
+    networks:
+      - backend
     environment:
      MYSQL_ROOT_PASSWORD: root
      MYSQL_ROOT_HOST: '%'
@@ -44,8 +44,8 @@ services:
      - "traefik.backend=proxy"
      - "traefik.frontend.rule=Host:proxy.local"
      - "traefik.port=8080"
-#    networks:
-#     - backend
+    networks:
+     - backend
      
-#networks:
-#  backend:
+networks:
+  backend:
