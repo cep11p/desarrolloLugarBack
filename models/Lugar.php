@@ -94,6 +94,9 @@ class Lugar extends BaseLugar
             'localidad'=> function($model){
                 return $model->localidad->nombre;
             },
+            'codigo_postal'=> function($model){
+                return $model->localidad->codigo_postal;
+            },
         ]);
             
         return $resultado;
