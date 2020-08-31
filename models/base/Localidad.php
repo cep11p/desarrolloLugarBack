@@ -14,6 +14,7 @@ use Yii;
  * @property integer $regionid
  * @property integer $departamentoid
  * @property integer $municipioid
+ * @property integer $codigo_postal
  *
  * @property \app\models\Departamento $departamento
  * @property \app\models\Municipio $municipio
@@ -40,7 +41,7 @@ abstract class Localidad extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['regionid', 'departamentoid', 'municipioid'], 'integer'],
+            [['regionid', 'departamentoid', 'municipioid', 'codigo_postal'], 'integer'],
             [['nombre'], 'string', 'max' => 200],
             [['departamentoid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Departamento::className(), 'targetAttribute' => ['departamentoid' => 'id']],
             [['municipioid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Municipio::className(), 'targetAttribute' => ['municipioid' => 'id']],
@@ -59,6 +60,7 @@ abstract class Localidad extends \yii\db\ActiveRecord
             'regionid' => 'Regionid',
             'departamentoid' => 'Departamentoid',
             'municipioid' => 'Municipioid',
+            'codigo_postal' => 'Codigo Postal',
         ];
     }
 
