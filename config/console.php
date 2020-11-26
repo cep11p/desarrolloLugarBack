@@ -30,6 +30,9 @@ $config = [
     
     'modules' => [
         'rbac' => 'dektrium\rbac\RbacConsoleModule',
+        "audit"=>[
+            "class"=>"bedezign\yii2\audit\Audit",
+        ]
     ],
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.
