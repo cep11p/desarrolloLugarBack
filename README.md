@@ -45,12 +45,7 @@ INSTALLATION
 
 ### Install via Docker
 
-Luego de crear la imagen de php, debemos crear y arrancar los contenedores que son necesario para el ambiente del sistema.
-    
-   	*Levantamos/Creamos los contenedores
-
-                -sin ambiente
-                docker-compose up -d
+Para el despliegue de la aplicacion vamos a la carpeta docker/ y corremos el sieguiente comando (esto mismo crea la bd)
 		
 		-ambiente prod
 		docker-compose -p app -f docker-compose.yml -f docker-compose-prod.yml up -d 
@@ -62,7 +57,7 @@ Luego de crear la imagen de php, debemos crear y arrancar los contenedores que s
 
 		docker-compose -p app down
 
-******************Ahora debemos importar el sql inicial del sistema******************
+******************Para importar la bd manualmente******************
 Creamos el esquema de la bd desde docker
         (PROD)
 	docker exec -i app_mimysql_1 mysql -u root -proot --execute 'create database lugar DEFAULT CHARACTER SET utf8'
