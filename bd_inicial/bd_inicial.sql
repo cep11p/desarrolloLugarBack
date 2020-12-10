@@ -18,6 +18,9 @@
 --
 -- Table structure for table `audit_data`
 --
+CREATE DATABASE IF NOT EXISTS lugar DEFAULT CHARACTER SET utf8;
+
+USE lugar;
 
 DROP TABLE IF EXISTS `audit_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

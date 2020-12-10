@@ -59,15 +59,10 @@ Para el despliegue de la aplicacion vamos a la carpeta docker/ y corremos el sie
 
 ******************Para importar la bd manualmente******************
 Creamos el esquema de la bd desde docker
-        (PROD)
-	docker exec -i app_mimysql_1 mysql -u root -proot --execute 'create database lugar DEFAULT CHARACTER SET utf8'
+	docker exec -i app_lugar_db_1 mysql -u root -proot --execute 'create database lugar DEFAULT CHARACTER SET utf8'
          
-        (DEV)
-	docker exec -i app_mimysql_1 mysql -u root -proot --execute 'create database lugar DEFAULT CHARACTER SET utf8'
-
 Importamos el sql inicial que se encuentra en /desarrolloLugarBack/bd_inicial
-
-	docker exec -i app_mimysql_1 mysql -u root -p lugar < bd_inicial.sql
+	docker exec -i app_lugar_db_1 mysql -u root -proot lugar < bd_inicial.sql
 
 Realizar los pasos en el siguiente orden:
 

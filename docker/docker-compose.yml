@@ -26,8 +26,10 @@ services:
     environment:
      MYSQL_ROOT_PASSWORD: root
      MYSQL_ROOT_HOST: '%'
+     MYSQL_DATABASE: lugar
     volumes:
      - ./../../dbdata:/var/lib/mysql
+     - ../bd_inicial:/docker-entrypoint-initdb.d
      
 ##### PROXY
 
