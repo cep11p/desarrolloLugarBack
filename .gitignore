@@ -24,6 +24,9 @@ composer.phar
 # local phpunit config
 /phpunit.xml
 
+# Dockerfile prod
+Dockerfile
+
 tests/_output/*
 tests/_support/_generated
 
