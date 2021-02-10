@@ -12,6 +12,7 @@ services:
     environment:
       DB_HOST: 'lugar_db'
       DB_NAME: 'lugar'
+      DB_PASS: ${DB_PASS}
     labels:
      - "traefik.backend=lugar"
      - "traefik.frontend.rule=Host:lugar.local"
