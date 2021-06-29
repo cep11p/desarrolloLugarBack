@@ -59,7 +59,6 @@ class LocalidadController extends ActiveController{
     public function prepareDataProvider() 
     {
         $searchModel = new \app\models\LocalidadSearch();
-//        return $searchModel->busquedadGeneral(\Yii::$app->request->queryParams);
         $resultado = $searchModel->busquedadGeneral(\Yii::$app->request->queryParams);
         
         $data = array('success'=>false);

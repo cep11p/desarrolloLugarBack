@@ -32,3 +32,6 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+# Refenrecia del ultimo commit que quedo para produccion
+commit-production.md
