@@ -28,8 +28,17 @@ class Localidad extends BaseLocalidad
         return ArrayHelper::merge(
             parent::rules(),
             [
-                # custom validation rules
+                ['nombre','validarLocalidad']
             ]
         );
+    }
+
+    public function validarLocalidad(){
+        if(!isset($this->departamentoid)){
+            $this->addError('departamentoid','Falta asignar el departamento');
+        }
+        if(!isset($this->codigo_postal)){
+            $this->addError('codigo_postal','Se requiere el codigo postal');
+        }
     }
 }

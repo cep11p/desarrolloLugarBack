@@ -1,6 +1,10 @@
 <?php
 namespace app\modules\api\controllers;
 
+use app\components\Help;
+use app\models\Localidad;
+use Exception;
+use Yii;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
@@ -50,7 +54,7 @@ class LocalidadController extends ActiveController{
         public function actions()
     {
         $actions = parent::actions();
-//        unset($actions['create']);
+       unset($actions['create']);
 //        unset($actions['update']);
         $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
         return $actions;
@@ -69,4 +73,32 @@ class LocalidadController extends ActiveController{
 
         return $data;
     }  
+
+    public function actionCreate()
+    {
+        $resultado['message']='Se registra una localidad';
+        $param = Yii::$app->request->post();
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            $model = new Localidad();
+            $model->setAttributes($param);
+            
+            if(!$model->save()){             
+                throw new Exception(Help::ArrayErrorsToString($model->getErrors()));
+            }            
+            
+            $transaction->commit();
+            
+            $resultado['success']=true;
+            $resultado['data']['id']=$model->id;
+            
+            return  $resultado;
+           
+        }catch (Exception $exc) {
+            $transaction->rollBack();
+            $mensaje =$exc->getMessage();
+            throw new \yii\web\HttpException(500, $mensaje);
+        }
+
+    }
 }
