@@ -46,4 +46,27 @@ class ProvinciaController extends ActiveController{
 
         return $behaviors;
     }
+
+    public function actions()
+    {
+        $actions = parent::actions();
+        unset($actions['create']);
+        unset($actions['update']);
+        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+        return $actions;
+    
+    }
+
+    public function prepareDataProvider() 
+    {
+        $searchModel = new \app\models\ProvinciaSearch();
+        $params = \Yii::$app->request->queryParams;
+        $resultado = $searchModel->search($params);
+        
+        if($resultado->getTotalCount()){
+            $data=$resultado->models;
+        }
+
+        return $data;
+    }   
 }
