@@ -54,8 +54,8 @@ class LocalidadController extends ActiveController{
         public function actions()
     {
         $actions = parent::actions();
-       unset($actions['create']);
-//        unset($actions['update']);
+        unset($actions['create']);
+        unset($actions['update']);
         $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
         return $actions;
     }
@@ -81,6 +81,38 @@ class LocalidadController extends ActiveController{
         $transaction = Yii::$app->db->beginTransaction();
         try {
             $model = new Localidad();
+            $model->setAttributes($param);
+            
+            if(!$model->save()){             
+                throw new Exception(Help::ArrayErrorsToString($model->getErrors()));
+            }            
+            
+            $transaction->commit();
+            
+            $resultado['success']=true;
+            $resultado['data']['id']=$model->id;
+            
+            return  $resultado;
+           
+        }catch (Exception $exc) {
+            $transaction->rollBack();
+            $mensaje =$exc->getMessage();
+            throw new \yii\web\HttpException(500, $mensaje);
+        }
+
+    }
+
+    public function actionUpdate($id){
+
+        $resultado['message']='Se modifica una localidad';
+        $param = Yii::$app->request->post();
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            #Buscamos la cuenta
+            $model = Localidad::findOne(['id'=>$id]);            
+            if($model==NULL){
+                throw new \yii\web\HttpException(400, 'La localidad con el id '.$id.' no existe!');
+            }
             $model->setAttributes($param);
             
             if(!$model->save()){             
