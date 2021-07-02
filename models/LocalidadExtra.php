@@ -35,6 +35,7 @@ class LocalidadExtra extends BaseLocalidadExtra
     public function validarLocalidad(){
         $localidad = Localidad::findOne(['id' => $this->localidadid]);
 
+
         if($localidad == NULL){
             $this->addError('localidadid','La localidad con el id '.$this->localidadid.' no exite.');
         }
@@ -45,6 +46,10 @@ class LocalidadExtra extends BaseLocalidadExtra
 
         if(!isset($localidad->departamentoid)){
             $this->addError('localidad','Se requiere el departamento de la localidad a vincular');
+        }
+
+        if(isset($localidad->departamento->provinciaid) && $localidad->departamento->provinciaid == Localidad::RIO_NEGRO){
+            $this->addError('localidad','Las localidades a vincular no deben ser de la pronvica de Río Negro');
         }
     }
 }

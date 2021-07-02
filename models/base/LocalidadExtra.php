@@ -35,6 +35,7 @@ abstract class LocalidadExtra extends \yii\db\ActiveRecord
         return [
             [['localidadid'], 'required'],
             [['localidadid'], 'integer'],
+            [['localidadid'], 'unique'],
             [['localidadid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Localidad::className(), 'targetAttribute' => ['localidadid' => 'id']]
         ];
     }

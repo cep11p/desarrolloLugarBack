@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
  */
 class Localidad extends BaseLocalidad
 {    
+    const RIO_NEGRO = 16;
     public $provinciaid; #solo sirve para hacer un join
 
     public function behaviors()
