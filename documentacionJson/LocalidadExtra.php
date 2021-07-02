@@ -5,32 +5,37 @@
 * @url http://lugar.local/api/localidad-extras
 * @method GET
 * @arrayReturn
-[
-    {
-        "id": 382,
-        "nombre": "Bahia Blanca",
-        "regionid": null,
-        "departamentoid": 9,
-        "municipioid": null,
-        "codigo_postal": 8000
-    },
-    {
-        "id": 613,
-        "nombre": "Carmen De Patagones",
-        "regionid": null,
-        "departamentoid": 78,
-        "municipioid": null,
-        "codigo_postal": 8504
-    },
-    {
-        "id": 2504,
-        "nombre": "Neuquen",
-        "regionid": null,
-        "departamentoid": 381,
-        "municipioid": null,
-        "codigo_postal": 8300
-    }
-]
+{
+    "pagesize": 0,
+    "pages": 0,
+    "total_filtrado": 4,
+    "resultado": [
+        {
+            "id": 382,
+            "nombre": "Bahia Blanca",
+            "regionid": null,
+            "departamentoid": 9,
+            "municipioid": null,
+            "codigo_postal": 8000
+        },
+        {
+            "id": 613,
+            "nombre": "Carmen De Patagones",
+            "regionid": null,
+            "departamentoid": 78,
+            "municipioid": null,
+            "codigo_postal": 8504
+        },
+        {
+            "id": 4073,
+            "nombre": "milocali",
+            "regionid": null,
+            "departamentoid": 1,
+            "municipioid": null,
+            "codigo_postal": 9999
+        }
+    ]
+}
 */
 
 /*****Para crear****

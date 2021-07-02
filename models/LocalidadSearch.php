@@ -71,9 +71,19 @@ class LocalidadSearch extends Localidad
     {
         $query = Localidad::find();
 
+        if(!isset($params['pagesize']) || !is_numeric($params['pagesize']) || $params['pagesize']==0){
+            $paginacion =false;
+        }else{
+            $pagesize = intval($params['pagesize']);
+            $paginacion = [
+                "pagesize"=>$pagesize,
+                "page"=>(isset($params['page']) && is_numeric($params['page']))?$params['page']:0
+            ];
+        }
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => false
+            'pagination' => $paginacion
         ]);
 
         $this->load($params,'');
@@ -116,7 +126,17 @@ class LocalidadSearch extends Localidad
             $query->orderBy(['nombre' => SORT_ASC]);
         }
         
+        /******* Se obtiene la coleccion******/
+        $coleccion = array();
+        foreach ($dataProvider->getModels() as $value) {
+            $coleccion[] = $value->toArray();
+        }
+               
+        $resultado['pagesize']=($paginacion == false)?0:$pagesize;            
+        $resultado['pages']=($paginacion == false)?0:ceil($dataProvider->totalCount/$pagesize);                 
+        $resultado['total_filtrado']=$dataProvider->totalCount;
+        $resultado['resultado']=$coleccion;
 
-        return $dataProvider;
+        return $resultado;
     }
 }

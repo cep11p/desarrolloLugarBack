@@ -64,14 +64,8 @@ class LocalidadController extends ActiveController{
     {
         $searchModel = new \app\models\LocalidadSearch();
         $resultado = $searchModel->busquedadGeneral(\Yii::$app->request->queryParams);
-        
-        $data = array('success'=>false);
-        if($resultado->getTotalCount()){
-            $data['success']=true;            
-            $data['resultado']=$resultado->models;
-        }
 
-        return $data;
+        return $resultado;
     }  
 
     public function actionCreate()
