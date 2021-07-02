@@ -65,9 +65,11 @@ class LocalidadExtraSearch extends LocalidadExtra
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-            'localidadid' => $this->localidadid,
-        ]);
+        if(isset($params['id'])){
+            $query->andFilterWhere([
+                'localidadid' => $params['id'],
+            ]);
+        }
 
         /******* Se obtiene la coleccion******/
         $coleccion = array();
@@ -75,7 +77,7 @@ class LocalidadExtraSearch extends LocalidadExtra
         foreach ($dataProvider->getModels() as $value) {
             $localidad_ids .= (empty($localidad_ids))?$value->localidadid:','.$value->localidadid;
         }
-        
+        $localidad_ids = (empty($localidad_ids))?99999999:$localidad_ids;
         $resultado = LocalidadSearch::busquedadGeneral(['ids'=>$localidad_ids]);
 
         return $resultado;
