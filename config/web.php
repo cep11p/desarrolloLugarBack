@@ -95,6 +95,9 @@ $config = [
                     'controller' => 'api/region', 
                 ],
                 [   'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/localidad-extra', 
+                ],
+                [   'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/parametro', 
                     'extraPatterns' => [
                         'OPTIONS lista' => 'lista',
