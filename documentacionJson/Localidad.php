@@ -2,9 +2,49 @@
 
 /**** Para mostrar listado ****/
 /**
-* @url http://lugar.local/api/localidads
+* @url http://lugar.local/api/localidads?
 * @method GET
+* @param pagesize = 4 
 * @arrayReturn
+{
+    "pagesize": 4,
+    "pages": 1007,
+    "total_filtrado": 4027,
+    "resultado": [
+        {
+            "id": 381,
+            "nombre": "16 De Julio",
+            "regionid": null,
+            "departamentoid": 8,
+            "municipioid": null,
+            "codigo_postal": null
+        },
+        {
+            "id": 640,
+            "nombre": "17 De Agosto",
+            "regionid": null,
+            "departamentoid": 85,
+            "municipioid": null,
+            "codigo_postal": null
+        },
+        {
+            "id": 809,
+            "nombre": "20 De Junio",
+            "regionid": null,
+            "departamentoid": 129,
+            "municipioid": null,
+            "codigo_postal": null
+        },
+        {
+            "id": 2084,
+            "nombre": "25 De Mayo",
+            "regionid": null,
+            "departamentoid": 295,
+            "municipioid": null,
+            "codigo_postal": null
+        }
+    ]
+}
 */
 
 /*****Para crear****
