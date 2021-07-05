@@ -11,7 +11,7 @@ use yii\web\Response;
 
 class LocalidadExtraController extends ActiveController{
     
-    public $modelClass = 'app\models\Localidadextra';
+    public $modelClass = 'app\models\LocalidadExtra';
     
     public function behaviors()
     {
