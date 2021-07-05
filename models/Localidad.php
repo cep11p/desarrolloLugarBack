@@ -42,4 +42,17 @@ class Localidad extends BaseLocalidad
             $this->addError('codigo_postal','Se requiere el codigo postal');
         }
     }
+
+    public function fields() {
+        $resultado = ArrayHelper::merge(parent::fields(), [
+            'departamento'=> function($model){
+                return $model->departamento->nombre;
+            },
+            'provincia' => function($model){
+                return $model->departamento->provincia->nombre;
+            },
+        ]);
+            
+        return $resultado;
+    }
 }

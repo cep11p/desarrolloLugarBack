@@ -11,7 +11,9 @@ use Yii;
  *
  * @property integer $id
  * @property string $nombre
+ * @property integer $provinciaid
  *
+ * @property \app\models\Provincia $provincia
  * @property \app\models\Localidad[] $localidads
  * @property string $aliasModel
  */
@@ -34,10 +36,10 @@ abstract class Departamento extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'nombre'], 'required'],
-            [['id'], 'integer'],
+            [['nombre'], 'required'],
+            [['provinciaid'], 'integer'],
             [['nombre'], 'string', 'max' => 300],
-            [['id'], 'unique']
+            [['provinciaid'], 'exist', 'skipOnError' => true, 'targetClass' => \app\models\Provincia::className(), 'targetAttribute' => ['provinciaid' => 'id']]
         ];
     }
 
@@ -49,7 +51,16 @@ abstract class Departamento extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nombre' => 'Nombre',
+            'provinciaid' => 'Provinciaid',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProvincia()
+    {
+        return $this->hasOne(\app\models\Provincia::className(), ['id' => 'provinciaid']);
     }
 
     /**

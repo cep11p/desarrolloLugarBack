@@ -12,7 +12,7 @@ use Yii;
  * @property integer $id
  * @property string $nombre
  *
- * @property \app\models\Localidad[] $localidads
+ * @property \app\models\Departamento[] $departamentos
  * @property string $aliasModel
  */
 abstract class Provincia extends \yii\db\ActiveRecord
@@ -55,9 +55,9 @@ abstract class Provincia extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLocalidads()
+    public function getDepartamentos()
     {
-        return $this->hasMany(\app\models\Localidad::className(), ['provinciaid' => 'id']);
+        return $this->hasMany(\app\models\Departamento::className(), ['provinciaid' => 'id']);
     }
 
 

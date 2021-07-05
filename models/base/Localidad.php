@@ -19,7 +19,7 @@ use Yii;
  * @property \app\models\Departamento $departamento
  * @property \app\models\Municipio $municipio
  * @property \app\models\Region $region
- * @property \app\models\LocalidadExtra[] $localidadExtras
+ * @property \app\models\LocalidadExtra $localidadExtra
  * @property \app\models\Lugar[] $lugars
  * @property string $aliasModel
  */
@@ -93,9 +93,9 @@ abstract class Localidad extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLocalidadExtras()
+    public function getLocalidadExtra()
     {
-        return $this->hasMany(\app\models\LocalidadExtra::className(), ['localidadid' => 'id']);
+        return $this->hasOne(\app\models\LocalidadExtra::className(), ['localidadid' => 'id']);
     }
 
     /**
