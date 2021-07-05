@@ -65,10 +65,25 @@ class LocalidadExtraSearch extends LocalidadExtra
             return $dataProvider;
         }
 
+        $query->leftJoin('localidad as l', 'localidadid=l.id');
+
         if(isset($params['id'])){
             $query->andFilterWhere([
                 'localidadid' => $params['id'],
             ]);
+        }
+
+        #Localidad
+        if(isset($params['nombre'])){
+            $query->andFilterWhere(['like', 'l.nombre', $params['nombre']]);
+        }
+        #Codigo Postal
+        if(isset($params['codigo_postal'])){
+            $query->andFilterWhere(['like', 'l.codigo_postal', $params['codigo_postal']]);
+        }
+        #Departamento
+        if(isset($params['departamentoid'])){
+            $query->andFilterWhere(['l.departamentoid' => $params['departamentoid']]);
         }
 
         /******* Se obtiene la coleccion******/

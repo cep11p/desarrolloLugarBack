@@ -2,7 +2,10 @@
 
 /**** Para mostrar listado ****/
 /**
-* @url http://lugar.local/api/localidad-extras
+* @url http://lugar.local/api/localidad-extras?
+* nombre=nombrelocalidad
+* codigo_postal=codigo
+* departamentoid=id
 * @method GET
 * @arrayReturn
 {
