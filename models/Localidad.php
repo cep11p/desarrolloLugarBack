@@ -41,6 +41,21 @@ class Localidad extends BaseLocalidad
         if(!isset($this->codigo_postal)){
             $this->addError('codigo_postal','Se requiere el codigo postal');
         }
+
+        #Validacion si existe localidad
+        if($this->isNewRecord){
+            #Crear
+            $localidad_encontrada = Localidad::findOne(['nombre' => $this->nombre, 'departamentoid' => $this->departamentoid]);
+            if($localidad_encontrada != null){
+                $this->addError('nombre','Ya existe la localidad '.$this->nombre.' con el departamento '.$this->departamento->nombre);
+            }
+        }else{
+            #Modificar
+            $localidad_encontrada = Localidad::find()->where(['nombre' => $this->nombre])->andWhere(['departamentoid' => $this->departamentoid])->andWhere(['not', ['id' => $this->id]])->one();
+            if($localidad_encontrada != null){
+                $this->addError('nombre','Ya existe la localidad '.$this->nombre.' con el departamento '.$this->departamento->nombre);
+            }
+        }
     }
 
     public function fields() {
